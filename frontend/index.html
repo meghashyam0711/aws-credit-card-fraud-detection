@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Credit Card Fraud Detection - Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="header">
+    <div class="header-container">
+      <div class="header-left">
+        <div class="header-icon">
+          <i class="fa-solid fa-shield-halved"></i>
+        </div>
+        <div>
+          <div class="header-title-row">
+            <h1 class="header-title">AI Credit Card Fraud Detection</h1>
+            <span class="badge badge-accent">HPCC Project</span>
+          </div>
+          <p class="header-subtitle">Real-time inference via AWS Serverless Machine Learning Pipeline</p>
+        </div>
+      </div>
+
+      <!-- Navigation & Status Badges -->
+      <div class="header-right">
+        <div class="status-badge">
+          <span class="status-dot"></span>
+          <span id="apiStatusBadge">API Connected</span>
+        </div>
+        <a href="architecture.html" class="arch-link" id="navArchitectureLink">
+          <i class="fa-solid fa-server"></i>
+          <span>Architecture</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-container">
+
+    <!-- Workspace Grid: Form (Left) & Results/Architecture (Right) -->
+    <div class="workspace-grid">
+
+      <!-- LEFT: Transaction Input Form -->
+      <section class="form-section">
+        <div class="card form-card">
+          
+          <!-- Card Header & Demos -->
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">
+                <i class="fa-solid fa-sliders accent-icon"></i>
+                Transaction Parameters
+              </h2>
+              <p class="card-desc">Enter transaction attributes or load demo profiles to evaluate against the AWS Random Forest model.</p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="header-actions">
+              <button type="button" id="btnDemoLegit" class="btn btn-secondary btn-sm" title="Load a typical legitimate transaction pattern">
+                <i class="fa-solid fa-circle-check text-success"></i>
+                <span>Load Demo (Legit)</span>
+              </button>
+              <button type="button" id="btnDemoFraud" class="btn btn-secondary btn-sm" title="Load high-risk fraud anomaly transaction pattern">
+                <i class="fa-solid fa-triangle-exclamation text-danger"></i>
+                <span>Load Demo (Fraud)</span>
+              </button>
+              <button type="button" id="btnClear" class="btn btn-ghost btn-sm" title="Clear all 29 fields">
+                <i class="fa-solid fa-arrow-rotate-left"></i>
+                <span>Clear</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- The Transaction Form -->
+          <form id="fraudForm" class="fraud-form" novalidate>
+            
+            <!-- Primary Transaction Amount Field -->
+            <div class="form-group amount-group">
+              <div class="amount-label-row">
+                <label for="inputAmount" class="form-label">
+                  <i class="fa-solid fa-dollar-sign accent-icon"></i>
+                  <span>Transaction Amount (USD)</span>
+                  <span class="required-star">*</span>
+                </label>
+                <span class="amount-badge">Scaled via StandardScaler in Lambda</span>
+              </div>
+              <div class="input-with-icon">
+                <span class="currency-symbol">$</span>
+                <input 
+                  type="number" 
+                  step="any" 
+                  min="0" 
+                  id="inputAmount" 
+                  name="Amount" 
+                  required 
+                  placeholder="149.62"
+                  class="form-input font-mono"
+                />
+              </div>
+              <p class="field-hint">Primary numeric feature. Standardized via StandardScaler before model evaluation.</p>
+            </div>
+
+            <!-- PCA Numerical Features Grid (V1 to V28) -->
+            <div class="features-section">
+              <div class="features-header">
+                <span class="features-title">PCA Numerical Features (V1 &ndash; V28)</span>
+                <span class="features-count font-mono">28 Features &bull; Float64</span>
+              </div>
+
+              <!-- Compact 4-column responsive grid -->
+              <div id="featuresGrid" class="features-grid">
+                <!-- Populated dynamically by script.js -->
+              </div>
+            </div>
+
+            <!-- Client-side Validation Error Banner -->
+            <div id="clientValidationError" class="alert alert-error hidden">
+              <i class="fa-solid fa-triangle-exclamation alert-icon"></i>
+              <div>
+                <strong>Missing Required Fields:</strong>
+                <p id="missingFieldsList" class="alert-desc font-mono"></p>
+                <p class="alert-sub">Please fill all 29 fields or click <strong>Load Demo</strong> above.</p>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-actions">
+              <button type="submit" id="btnPredict" class="btn btn-primary btn-block btn-lg">
+                <span id="btnPredictSpinner" class="spinner-sm hidden"></span>
+                <i class="fa-solid fa-bolt-lightning"></i>
+                <span id="btnPredictText">Check Transaction</span>
+              </button>
+            </div>
+
+          </form>
+
+        </div>
+      </section>
+
+      <!-- RIGHT: Result Card & System Architecture -->
+      <section class="results-section">
+
+        <!-- Model Inference Output Card -->
+        <div id="resultCard" class="card result-card">
+          <div class="card-header-compact">
+            <h3 class="card-title-compact">
+              <i class="fa-solid fa-chart-pie accent-icon"></i>
+              Model Inference Output
+            </h3>
+            <span id="inferenceTimestamp" class="timestamp-tag font-mono">Awaiting input</span>
+          </div>
+
+          <!-- State 1: Placeholder -->
+          <div id="statePlaceholder" class="state-container state-placeholder">
+            <div class="placeholder-icon">
+              <i class="fa-solid fa-microchip"></i>
+            </div>
+            <h4>Ready for Analysis</h4>
+            <p>Fill in the 29 features or click <strong>Load Demo (Legit)</strong> / <strong>Load Demo (Fraud)</strong> to evaluate with your AWS ML endpoint.</p>
+            <div class="decision-rule-hint">
+              <div class="hint-pill">
+                <span class="pill-dot pill-ml"></span>
+                <span><strong>Inference Engine:</strong> AWS Random Forest Model (50 Trees)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- State 2: Loading -->
+          <div id="stateLoading" class="state-container state-loading hidden">
+            <div class="loading-spinner-wrapper">
+              <div class="loading-ring"></div>
+              <div class="loading-icon"><i class="fa-brands fa-aws"></i></div>
+            </div>
+                        <h4>Analyzing Transaction...</h4>
+            <p>Evaluating 29 features with AWS Random Forest</p>
+            <div class="analysis-timer-bar">
+              <div id="analysisTimerProgress" class="analysis-timer-fill"></div>
+            </div>
+            <span class="font-mono text-xs text-muted" id="analysisCountdownText">Processing model inference (~5s)</span>
+          </div>
+
+          <!-- State 3: Active Result (Fraud or Legit / ML or Fallback) -->
+          <div id="stateResult" class="state-container state-result hidden">
+            
+            <!-- Source & Status Header Bar -->
+            <div class="result-source-bar">
+              <div id="resultSystemBadge" class="system-badge badge-ml">
+                <i class="fa-solid fa-circle-check"></i>
+                <span>ML MODEL PREDICTION</span>
+              </div>
+              <div class="system-details font-mono" id="resultSystemSource">
+                Source: Random Forest &bull; AWS: Lambda + API Gateway
+              </div>
+            </div>
+
+            <!-- Result Banner -->
+            <div id="resultBanner" class="result-banner banner-legit">
+              <div id="resultIconWrapper" class="result-icon-box">
+                <i class="fa-solid fa-circle-check"></i>
+              </div>
+              <div>
+                <h4 id="resultTitle" class="result-title">Transaction Appears Legitimate</h4>
+                <p id="resultSubtitle" class="result-subtitle">Random Forest classified this transaction as legitimate.</p>
+              </div>
+            </div>
+
+            <!-- Section 10 Specification Table -->
+            <div class="result-specs-card">
+              <div class="specs-table-header font-mono">TRANSACTION INFERENCE SPECIFICATIONS</div>
+              <div class="specs-grid">
+                <div class="spec-cell">
+                  <span class="spec-label">Prediction</span>
+                  <span id="specPrediction" class="spec-value font-mono">--</span>
+                </div>
+                <div class="spec-cell">
+                  <span class="spec-label">Class</span>
+                  <span id="specClass" class="spec-value font-mono">--</span>
+                </div>
+                <div class="spec-cell">
+                  <span class="spec-label">Risk Score</span>
+                  <span id="specRiskScore" class="spec-value font-mono">--</span>
+                </div>
+                <div class="spec-cell">
+                  <span class="spec-label">Source</span>
+                  <span id="specSource" class="spec-value font-mono">--</span>
+                </div>
+                <div class="spec-cell">
+                  <span class="spec-label">Status</span>
+                  <span id="specStatus" class="spec-value font-mono">--</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Metrics & Gauge Row -->
+            <div class="metrics-grid">
+              <div class="metric-card">
+                <div class="metric-label" id="riskGaugeLabel">Risk Score</div>
+                <div id="riskScoreValue" class="metric-value font-mono">0.00%</div>
+                <div class="progress-bar-track">
+                  <div id="riskScoreBar" class="progress-bar-fill" style="width: 0%"></div>
+                </div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-label">Class Label</div>
+                <div id="classLabelValue" class="metric-value font-mono">--</div>
+                <div id="classMeaningText" class="metric-note">1 = Fraud, 0 = Legit</div>
+              </div>
+            </div>
+
+            <!-- Raw Inspector -->
+            <div class="raw-response-box">
+              <div class="raw-header">
+                <span id="rawHeaderTitle">AWS API RESPONSE PAYLOAD:</span>
+                <span id="rawHeaderStatus" class="status-ok">HTTP 200 OK</span>
+              </div>
+              <pre id="rawJsonResponse" class="raw-code font-mono"></pre>
+            </div>
+
+          </div>
+
+          <!-- State 4: Error State -->
+          <div id="stateError" class="state-container state-error hidden">
+            <div class="alert alert-error">
+              <div class="error-header">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <span id="errorHeadline">Transaction Request Failed</span>
+              </div>
+              <p id="errorMessage" class="error-message">Unable to connect to the AWS prediction service.</p>
+              <div id="missingFeaturesBox" class="missing-features-box hidden">
+                <strong>Missing Features Detected:</strong>
+                <div id="missingFeaturesList" class="font-mono"></div>
+              </div>
+            </div>
+            <button type="button" id="btnDismissError" class="btn btn-secondary btn-block btn-sm">
+              Dismiss
+            </button>
+          </div>
+
+        </div>
+
+        <!-- AWS System & Pipeline Architecture Card -->
+        <div id="system-architecture" class="card arch-card">
+          <div class="card-header-compact">
+            <h4 class="card-title-compact">
+              <i class="fa-brands fa-aws accent-icon"></i>
+              System Pipeline &amp; Decision Architecture
+            </h4>
+            <a href="architecture.html" class="badge badge-accent font-mono" style="text-decoration:none;">View Workflow &rarr;</a>
+          </div>
+
+          <!-- Pipeline Flowchart -->
+          <div class="pipeline-list font-mono">
+            <div class="pipeline-step">
+              <span class="step-number step-1">1</span>
+              <div class="step-info">
+                <span class="step-title">Frontend Dashboard</span>
+                <span class="step-desc">Client validation &amp; 29-feature JSON packaging</span>
+              </div>
+              <i class="fa-solid fa-arrow-down step-arrow"></i>
+            </div>
+
+            <div class="pipeline-step">
+              <span class="step-number step-2">2</span>
+              <div class="step-info">
+                <span class="step-title">Amazon API Gateway</span>
+                <span class="step-desc">HTTP API route (POST /predict)</span>
+              </div>
+              <i class="fa-solid fa-arrow-down step-arrow"></i>
+            </div>
+
+            <div class="pipeline-step">
+              <span class="step-number step-3">3</span>
+              <div class="step-info">
+                <span class="step-title">AWS Lambda Compute</span>
+                <span class="step-desc">Python 3.12 &bull; Amount scaling &amp; DataFrame prep</span>
+              </div>
+              <i class="fa-solid fa-arrow-down step-arrow"></i>
+            </div>
+
+            <div class="pipeline-step">
+              <span class="step-number step-4">4</span>
+              <div class="step-info">
+                <span class="step-title">Random Forest (Level 1 Primary)</span>
+                <span class="step-desc">In-memory model weights &bull; 50 decision trees</span>
+              </div>
+              <i class="fa-solid fa-arrow-down step-arrow"></i>
+            </div>
+
+            <div class="pipeline-step">
+              <span class="step-number step-5">5</span>
+              <div class="step-info">
+                <span class="step-title">Model Inference Output</span>
+                <span class="step-desc">Calibrated risk score &amp; fraud classification</span>
+              </div>
+              <i class="fa-solid fa-check step-check"></i>
+            </div>
+          </div>
+
+          <!-- Architecture Metadata Table -->
+          <div class="arch-meta-grid">
+            <div>
+              <span class="meta-label">Primary Engine:</span>
+              <span class="meta-val">Random Forest</span>
+            </div>
+            <div>
+              <span class="meta-label">Analysis Speed:</span>
+              <span class="meta-val">~5 seconds</span>
+            </div>
+            <div>
+              <span class="meta-label">S3 Model:</span>
+              <span class="meta-val">model.joblib</span>
+            </div>
+            <div>
+              <span class="meta-label">Execution:</span>
+              <span class="meta-val">Sub-350ms</span>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <p>AI Credit Card Fraud Detection System &bull; HPCC Mini-Project</p>
+      <div class="footer-links">
+        <a href="architecture.html" class="arch-link">View Architecture &amp; Animated Pipeline</a>
+        <span>&bull;</span>
+        <span class="font-mono text-muted">Region: us-east-1</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Architecture &amp; Animated Workflow | AI Credit Card Fraud Detection</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="architecture.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="arch-body">
+
+  <!-- Top Navigation Header -->
+  <header class="header">
+    <div class="header-container">
+      <div class="header-left">
+        <!-- Back to Dashboard Link -->
+        <a href="index.html" class="btn btn-secondary btn-sm back-link" id="btnBackToDashboard">
+          <i class="fa-solid fa-arrow-left"></i>
+          <span>Back to Dashboard</span>
+        </a>
+        <div class="nav-divider"></div>
+        <div>
+          <div class="header-title-row">
+            <h1 class="header-title">AI Credit Card Fraud Detection</h1>
+            <span class="badge badge-accent">HPCC Architecture</span>
+          </div>
+          <p class="header-subtitle">AWS Serverless Machine Learning System &bull; Live Technical Workflow</p>
+        </div>
+      </div>
+
+      <!-- Academic Badges & Status -->
+      <div class="header-right">
+        <div class="status-badge">
+          <span class="status-dot"></span>
+          <span>System Online</span>
+        </div>
+        <span class="badge badge-soft hidden-sm">Academic Mini-Project</span>
+        <span class="badge badge-accent hidden-md">Region: us-east-1</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-container">
+
+    <!-- Hero Header -->
+    <section class="card arch-hero-card">
+      <div class="hero-flex">
+        <div class="hero-text">
+          <div class="hero-tag">
+            <i class="fa-solid fa-diagram-project"></i>
+            <span>Architecture Specification &bull; Live System Demonstration</span>
+          </div>
+          <h2 class="hero-heading">System Architecture &amp; Animated Workflow</h2>
+          <p class="hero-desc">
+            Watch transaction data move in real time across the complete AWS serverless machine learning pipeline: 
+            from the <strong>Frontend Dashboard</strong> through <strong>Amazon API Gateway</strong>, 
+            <strong>AWS Lambda (Python 3.12)</strong>, <strong>Amazon S3</strong> model artifact storage, 
+            the <strong>Scikit-Learn Random Forest</strong> classifier, and the <strong>Dual-Layer Decision Gate</strong> (Primary ML Model vs Backup Amount Rule).
+          </p>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-box">
+            <span class="stat-label">Inference Latency</span>
+            <span class="stat-value">&lt; 350 ms</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Features</span>
+            <span class="stat-value">29 Attributes</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Architecture</span>
+            <span class="stat-value accent-text">100% Serverless</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         MAIN FEATURE: ANIMATED WORKING PIPELINE ("How the System Works")
+         ===================================================================== -->
+    <section class="card section-block anim-main-card" id="how-the-system-works">
+      
+      <!-- Section Top Header & Step Indicator -->
+      <div class="anim-section-header">
+        <div>
+          <div class="section-tag-row">
+            <span class="section-tag">Interactive Simulation</span>
+            <span class="badge badge-soft font-mono" id="animStatusPill">Live Animation Active</span>
+          </div>
+          <h3 class="section-title">How the System Works</h3>
+          <p class="section-desc">Real-time transaction flow: follow the moving data packet and active node highlights through the AWS + ML pipeline.</p>
+        </div>
+
+        <!-- Workflow Controls: Play / Pause / Restart / Mode -->
+        <div class="anim-controls-toolbar">
+          <button type="button" class="btn btn-sm btn-secondary ctrl-btn" id="btnPlay" title="Play animation">
+            <i class="fa-solid fa-play"></i>
+            <span>Play</span>
+          </button>
+          <button type="button" class="btn btn-sm btn-secondary ctrl-btn" id="btnPause" title="Pause animation">
+            <i class="fa-solid fa-pause"></i>
+            <span>Pause</span>
+          </button>
+          <button type="button" class="btn btn-sm btn-secondary ctrl-btn" id="btnRestart" title="Restart animation from Step 1">
+            <i class="fa-solid fa-rotate-left"></i>
+            <span>Restart</span>
+          </button>
+          <div class="toolbar-divider"></div>
+          <button type="button" class="btn btn-sm btn-outline-accent ctrl-btn" id="btnToggleSimMode" title="Toggle between Primary ML flow and Backup Fallback flow">
+            <i class="fa-solid fa-code-fork"></i>
+            <span id="simModeText">Mode: Primary ML</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Current Step Progress Bar & Headline -->
+      <div class="step-progress-banner">
+        <div class="step-counter-box">
+          <span class="step-prefix font-mono">WORKFLOW STEP</span>
+          <span class="step-number-display font-mono" id="stepCounter">01 / 09</span>
+        </div>
+        <div class="step-info-box">
+          <div class="step-name-row">
+            <h4 class="step-name-text" id="stepName">USER</h4>
+            <span class="step-phase-badge" id="stepPhaseBadge">Inbound Request</span>
+          </div>
+          <p class="step-desc-text" id="stepDescription">Enters transaction information on the web dashboard.</p>
+        </div>
+        <div class="step-progress-track">
+          <div class="step-progress-fill" id="stepProgressFill" style="width: 11%;"></div>
+        </div>
+      </div>
+
+      <!-- Interactive Canvas / Visual Workflow Pipeline -->
+      <div class="pipeline-stage-wrapper">
+        
+        <!-- Main Forward Transmission Track -->
+        <div class="pipeline-track-horizontal" id="forwardPipelineTrack">
+          
+          <!-- Node 1: User -->
+          <div class="pipe-node" id="node-user" data-step="1">
+            <div class="node-icon-box">
+              <i class="fa-solid fa-user"></i>
+            </div>
+            <span class="node-title">USER</span>
+            <span class="node-sub">Enters Data</span>
+            <div class="node-step-tooltip">Step 01: Enters transaction data (Amount + 28 PCA features)</div>
+          </div>
+
+          <!-- Connector 1 -> 2 -->
+          <div class="track-connector" id="conn-1">
+            <span class="conn-label font-mono">Input</span>
+            <div class="conn-line">
+              <div class="packet packet-inbound" id="packet-1"></div>
+            </div>
+          </div>
+
+          <!-- Node 2: Frontend Dashboard -->
+          <div class="pipe-node" id="node-frontend" data-step="2">
+            <div class="node-icon-box">
+              <i class="fa-solid fa-desktop"></i>
+            </div>
+            <span class="node-title">FRONTEND</span>
+            <span class="node-sub">Validates 29 Features</span>
+            <div class="node-step-tooltip">Step 02: Validates numbers; serializes payload into JSON</div>
+          </div>
+
+          <!-- Connector 2 -> 3 -->
+          <div class="track-connector" id="conn-2">
+            <span class="conn-label font-mono">POST /predict</span>
+            <div class="conn-line">
+              <div class="packet packet-inbound" id="packet-2"></div>
+            </div>
+          </div>
+
+          <!-- Node 3: Amazon API Gateway -->
+          <div class="pipe-node" id="node-gateway" data-step="3">
+            <div class="node-icon-box">
+              <i class="fa-solid fa-network-wired"></i>
+            </div>
+            <span class="node-title">API GATEWAY</span>
+            <span class="node-sub">HTTPS Routing &amp; CORS</span>
+            <div class="node-step-tooltip">Step 03: Receives POST /predict, checks SSL/CORS, invokes Lambda</div>
+          </div>
+
+          <!-- Connector 3 -> 4 -->
+          <div class="track-connector" id="conn-3">
+            <span class="conn-label font-mono">Trigger</span>
+            <div class="conn-line">
+              <div class="packet packet-inbound" id="packet-3"></div>
+            </div>
+          </div>
+
+          <!-- Node 4: AWS Lambda -->
+          <div class="pipe-node node-lambda-highlight" id="node-lambda" data-step="4">
+            <div class="node-icon-box">
+              <i class="fa-solid fa-microchip"></i>
+            </div>
+            <span class="node-title">AWS LAMBDA</span>
+            <span class="node-sub">Compute &amp; Preprocessing</span>
+            <div class="node-step-tooltip">Step 04: Scales Amount, builds DataFrame in exact feature order</div>
+          </div>
+
+          <!-- Connector 4 -> 5 -->
+          <div class="track-connector" id="conn-4">
+            <span class="conn-label font-mono">Vector</span>
+            <div class="conn-line">
+              <div class="packet packet-inbound" id="packet-4"></div>
+            </div>
+          </div>
+
+          <!-- Node 5: Random Forest Model -->
+          <div class="pipe-node" id="node-model" data-step="5">
+            <div class="node-icon-box">
+              <i class="fa-solid fa-brain"></i>
+            </div>
+            <span class="node-title">RANDOM FOREST</span>
+            <span class="node-sub">50 Ensemble Trees</span>
+            <div class="node-step-tooltip">Step 05: Evaluates 50 decision trees for fraud classification</div>
+          </div>
+
+          <!-- Connector 5 -> 6 (Inference Vector into Decision Gate) -->
+          <div class="track-connector" id="conn-5">
+            <span class="conn-label font-mono">Inference</span>
+            <div class="conn-line">
+              <div class="packet packet-inbound" id="packet-5"></div>
+            </div>
+          </div>
+
+          <!-- Node 6: Prediction Available? (Decision Gate) -->
+          <div class="pipe-node node-decision-highlight" id="node-decision" data-step="6">
+            <div class="node-icon-box node-icon-decision">
+              <i class="fa-solid fa-code-fork"></i>
+            </div>
+            <span class="node-title">VALID PREDICTION?</span>
+            <span class="node-sub">Decision Gate</span>
+            <div class="node-step-tooltip">Step 06: Evaluates ML model result vs backup fallback rule</div>
+          </div>
+
+          <!-- Primary Output: Random Forest Prediction -->
+          <div class="pipe-node" id="node-prediction" data-step="6">
+            <div class="node-icon-box node-icon-prediction">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <span class="node-title">ML PREDICTION</span>
+            <span class="node-sub">Primary (Level 1)</span>
+            <div class="node-step-tooltip">Step 06a: Returns Fraud or Legit with calibrated ML Risk Score</div>
+          </div>
+
+        </div>
+
+        <!-- DUAL-LAYER DECISION & FALLBACK BRANCH CARD -->
+        <div class="decision-branch-wrapper" id="decisionBranchWrapper">
+          <div class="decision-branch-header">
+            <span class="badge badge-accent font-mono"><i class="fa-solid fa-code-fork"></i> DUAL-LAYER DECISION LOGIC</span>
+            <span class="text-xs text-muted font-mono">Level 1 Primary ML Model &bull; Level 2 Backup Fallback Rule</span>
+          </div>
+
+          <div class="decision-branch-grid">
+            <!-- YES Path: Primary Random Forest -->
+            <div class="branch-card branch-yes active-branch" id="branchCardYes">
+              <div class="branch-top-tag">
+                <span class="badge badge-ml font-mono"><i class="fa-solid fa-circle-check"></i> YES &bull; PRIMARY FLOW</span>
+                <span class="font-mono text-xs text-muted">Normal Operation</span>
+              </div>
+              <h5 class="branch-title">Use Random Forest Result</h5>
+              <p class="branch-desc">Model successfully returns prediction, class, and continuous risk score. Displayed directly to user.</p>
+              <div class="branch-sample font-mono text-xs">
+                Prediction: <strong>Fraud / Legit</strong> &bull; Risk Score: <strong>XX.XX%</strong> &bull; Class: <strong>1 / 0</strong>
+              </div>
+              <div class="branch-rule-note">
+                <i class="fa-solid fa-check"></i> <em>Valid ML predictions are NEVER overridden by the $400 rule.</em>
+              </div>
+            </div>
+
+            <!-- NO Path: Backup Only Fallback Rule -->
+            <div class="branch-card branch-no" id="branchCardNo">
+              <div class="branch-top-tag">
+                <span class="badge badge-fallback font-mono"><i class="fa-solid fa-triangle-exclamation"></i> NO &bull; BACKUP ONLY</span>
+                <span class="font-mono text-xs text-muted">ML Unavailable</span>
+              </div>
+              <h5 class="branch-title">Fallback Risk Assessment</h5>
+              <p class="branch-desc">Activates ONLY if AWS API Gateway, Lambda, or network is unreachable or response is invalid.</p>
+              <div class="branch-sample font-mono text-xs">
+                Amount &le; $400 &rarr; <strong>Legit (Class 0, Low Risk)</strong><br>
+                Amount &gt; $400 &rarr; <strong>Fraud (Class 1, High Risk)</strong>
+              </div>
+              <div class="branch-rule-note fallback-only-note">
+                <i class="fa-solid fa-shield-halved"></i> <strong>Backup Only:</strong> Risk Score is N/A. Never replaces a valid Random Forest result.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Return Transmission Path (Response travels back) -->
+        <div class="return-pipeline-bar" id="returnPipelineBar">
+          <div class="return-bar-header">
+            <span class="return-tag font-mono"><i class="fa-solid fa-arrow-left"></i> RETURN RESPONSE TRANSMISSION PATH</span>
+            <span class="return-note font-mono">HTTP 200 OK &bull; JSON Response</span>
+          </div>
+          <div class="return-track-line">
+            <div class="packet packet-return" id="packet-return"></div>
+            <div class="return-steps-row">
+              <span class="r-step" id="r-step-pred"><i class="fa-solid fa-circle-check"></i> Prediction / Verdict</span>
+              <span class="r-arrow">&larr;</span>
+              <span class="r-step" id="r-step-lambda"><i class="fa-solid fa-microchip"></i> Lambda JSON Formatter</span>
+              <span class="r-arrow">&larr;</span>
+              <span class="r-step" id="r-step-gateway"><i class="fa-solid fa-network-wired"></i> API Gateway Egress</span>
+              <span class="r-arrow">&larr;</span>
+              <span class="r-step" id="r-step-frontend"><i class="fa-solid fa-desktop"></i> Frontend Result Banner</span>
+              <span class="r-arrow">&larr;</span>
+              <span class="r-step" id="r-step-user"><i class="fa-solid fa-user-check"></i> User Receives Risk Score</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Supporting Side Branches: S3, CloudWatch, IAM -->
+        <div class="side-branches-grid">
+          
+          <!-- S3 Side Component -->
+          <div class="side-card" id="side-s3">
+            <div class="side-card-header">
+              <div class="side-card-title">
+                <i class="fa-solid fa-box-archive text-amber"></i>
+                <span>Amazon S3 ML Storage</span>
+              </div>
+              <span class="badge badge-soft font-mono">Side Component</span>
+            </div>
+            <div class="side-artifact-info">
+              <div class="font-mono text-xs text-muted">Bucket: <strong>shyam-fraud-ml-model-2026</strong></div>
+              <div class="font-mono text-xs text-muted">Artifacts: <code>model/model.joblib</code> &bull; <code>model/scaler.joblib</code></div>
+            </div>
+            <div class="side-connect-line" id="s3-connect-line">
+              <span class="s3-pulse-dot" id="s3PulseDot"></span>
+              <span class="font-mono text-[11px] text-muted">&uarr; ML Artifacts: Loaded when required &bull; Cached during warm invocations</span>
+            </div>
+            <p class="side-footnote">
+              <i class="fa-solid fa-shield-halved"></i> <strong>S3 is Model Storage:</strong> Customer transactions are NEVER stored in S3.
+            </p>
+          </div>
+
+          <!-- CloudWatch Side Component -->
+          <div class="side-card" id="side-cloudwatch">
+            <div class="side-card-header">
+              <div class="side-card-title">
+                <i class="fa-solid fa-chart-line text-emerald"></i>
+                <span>Amazon CloudWatch Monitoring</span>
+              </div>
+              <span class="badge badge-soft font-mono">Side Stream</span>
+            </div>
+            <div class="cw-metrics-preview">
+              <div class="cw-metric-item">
+                <span class="cw-label">Warm Latency</span>
+                <span class="cw-val text-emerald">~ 45 ms</span>
+              </div>
+              <div class="cw-metric-item">
+                <span class="cw-label">Memory Used</span>
+                <span class="cw-val">~ 182 MB</span>
+              </div>
+              <div class="cw-metric-item">
+                <span class="cw-label">Error Rate</span>
+                <span class="cw-val text-blue">0.00%</span>
+              </div>
+            </div>
+            <div class="side-connect-line" id="cw-connect-line">
+              <span class="cw-pulse-dot" id="cwPulseDot"></span>
+              <span class="font-mono text-[11px] text-muted">&rarr; Logs &amp; Metrics stream asynchronously (zero inline latency)</span>
+            </div>
+            <p class="side-footnote">
+              <i class="fa-solid fa-circle-info"></i> CloudWatch records execution health without sitting in the transaction path.
+            </p>
+          </div>
+
+          <!-- IAM Side Component -->
+          <div class="side-card" id="side-iam">
+            <div class="side-card-header">
+              <div class="side-card-title">
+                <i class="fa-solid fa-lock text-rose"></i>
+                <span>AWS IAM Least-Privilege Role</span>
+              </div>
+              <span class="badge badge-soft font-mono">Security Barrier</span>
+            </div>
+            <div class="iam-policy-summary font-mono text-xs">
+              <div>Role: <strong>LambdaExecutionRole</strong></div>
+              <div>Permission: <code>s3:GetObject</code> on model bucket only</div>
+              <div>S3 Policy: Block Public Access strictly enabled</div>
+            </div>
+            <div class="side-connect-line">
+              <span class="font-mono text-[11px] text-muted">&darr; Least-privilege credential broker &bull; Zero keys in browser</span>
+            </div>
+            <p class="side-footnote">
+              <i class="fa-solid fa-lock"></i> S3 remains private; browser communicates only with API Gateway.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- LAMBDA INTERNAL WORKFLOW (Visually expands when Step 4 is active) -->
+      <div class="lambda-internal-section" id="lambdaInternalSection">
+        <div class="lambda-internal-header">
+          <div class="l-int-title-group">
+            <span class="badge badge-accent font-mono">INTERNAL WORKFLOW DEEP-DIVE</span>
+            <h4 class="l-int-title">What Happens Inside AWS Lambda</h4>
+          </div>
+          <span class="l-int-status font-mono" id="lambdaActiveStatus">Standing by</span>
+        </div>
+        
+        <div class="lambda-substeps-track">
+          <div class="l-substep" id="lsub-1">
+            <span class="l-sub-idx font-mono">1</span>
+            <span class="l-sub-name">Parse Request</span>
+            <span class="l-sub-desc">Decodes body from v2.0 event envelope</span>
+          </div>
+          <div class="l-substep" id="lsub-2">
+            <span class="l-sub-idx font-mono">2</span>
+            <span class="l-sub-name">Validate Features</span>
+            <span class="l-sub-desc">Ensures all 29 features exist</span>
+          </div>
+          <div class="l-substep" id="lsub-3">
+            <span class="l-sub-idx font-mono">3</span>
+            <span class="l-sub-name">Prepare Features</span>
+            <span class="l-sub-desc">Arranges model.feature_names_in_ order</span>
+          </div>
+          <div class="l-substep" id="lsub-4">
+            <span class="l-sub-idx font-mono">4</span>
+            <span class="l-sub-name">Scale Amount</span>
+            <span class="l-sub-desc">Transforms ONLY Amount via scaler</span>
+          </div>
+          <div class="l-substep" id="lsub-5">
+            <span class="l-sub-idx font-mono">5</span>
+            <span class="l-sub-name">Load Model / Scaler</span>
+            <span class="l-sub-desc">Reuses warm in-memory cache</span>
+          </div>
+          <div class="l-substep" id="lsub-6">
+            <span class="l-sub-idx font-mono">6</span>
+            <span class="l-sub-name">Run Inference</span>
+            <span class="l-sub-desc">Executes model.predict(input_df)</span>
+          </div>
+          <div class="l-substep" id="lsub-7">
+            <span class="l-sub-idx font-mono">7</span>
+            <span class="l-sub-name">Calculate Risk Score</span>
+            <span class="l-sub-desc">Extracts class 1 probability</span>
+          </div>
+          <div class="l-substep" id="lsub-8">
+            <span class="l-sub-idx font-mono">8</span>
+            <span class="l-sub-name">Create JSON Response</span>
+            <span class="l-sub-desc">Assembles HTTP 200 with CORS</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SIMULATION RESULT DRAWER (Appears at Step 6 - 9) -->
+      <div class="sim-result-card hidden" id="simResultCard">
+        <div class="sim-result-header">
+          <div class="sim-tag-row">
+            <span class="badge font-mono" id="simBadge">SIMULATION RESULT</span>
+            <span class="sim-academic-note" id="simModeNote">&bull; Real-Time Inference Demonstration</span>
+          </div>
+          <span class="font-mono text-xs text-muted" id="simHttpStatus">HTTP 200 OK</span>
+        </div>
+        <div class="sim-result-body">
+          <div class="sim-metric-group">
+            <div class="sim-badge-box">
+              <span class="sim-badge-label">PREDICTION</span>
+              <span class="sim-badge-val text-danger font-mono" id="simPredVal">Fraud</span>
+            </div>
+            <div class="sim-badge-box">
+              <span class="sim-badge-label">CLASS</span>
+              <span class="sim-badge-val font-mono" id="simClassVal">1</span>
+            </div>
+            <div class="sim-badge-box">
+              <span class="sim-badge-label">RISK SCORE</span>
+              <span class="sim-badge-val text-danger font-mono" id="simScoreVal">92.34%</span>
+            </div>
+            <div class="sim-badge-box">
+              <span class="sim-badge-label">SOURCE</span>
+              <span class="sim-badge-val font-mono" id="simSourceVal">Random Forest</span>
+            </div>
+          </div>
+          <div class="sim-json-sample font-mono text-xs">
+            <code id="simJsonCode">{ "prediction": "Fraud", "class": 1, "risk_score": 0.923406, "source": "Random Forest" }</code>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- =====================================================================
+         SECTION 8: TRAINING PIPELINE ("How the ML Model Was Created")
+         ===================================================================== -->
+    <section class="card section-block" id="training-pipeline-section">
+      <div class="section-header">
+        <div>
+          <span class="section-tag">Offline Stage</span>
+          <h3 class="section-title">How the ML Model Was Created</h3>
+          <p class="section-desc">The offline machine learning training, validation, and artifact deployment sequence to Amazon S3.</p>
+        </div>
+        <div class="training-badge-box">
+          <span class="badge badge-soft font-mono">MODEL TRAINING / DEPLOYMENT PATH</span>
+          <button type="button" class="btn btn-sm btn-secondary" id="btnAnimateTraining" title="Animate training flow">
+            <i class="fa-solid fa-play text-xs"></i>
+            <span>Simulate Training</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Training Flow Steps -->
+      <div class="training-flow-track">
+        <div class="t-step" id="tstep-1">
+          <div class="t-step-idx">01</div>
+          <h5 class="t-step-name">creditcard.csv</h5>
+          <p class="t-step-desc">284,807 European transactions (0.172% fraud incidence)</p>
+        </div>
+        <div class="t-arrow">&rarr;</div>
+
+        <div class="t-step" id="tstep-2">
+          <div class="t-step-idx">02</div>
+          <h5 class="t-step-name">Data Preprocessing</h5>
+          <p class="t-step-desc">Null checks, class distribution audit, type validation</p>
+        </div>
+        <div class="t-arrow">&rarr;</div>
+
+        <div class="t-step" id="tstep-3">
+          <div class="t-step-idx">03</div>
+          <h5 class="t-step-name">Feature Selection</h5>
+          <p class="t-step-desc">Dropped 'Time' and 'id'. Isolated 28 PCA features + Amount</p>
+        </div>
+        <div class="t-arrow">&rarr;</div>
+
+        <div class="t-step" id="tstep-4">
+          <div class="t-step-idx">04</div>
+          <h5 class="t-step-name">StandardScaler Fit</h5>
+          <p class="t-step-desc">Fit scaler exclusively on Amount; saved scaler.joblib</p>
+        </div>
+        <div class="t-arrow">&rarr;</div>
+
+        <div class="t-step" id="tstep-5">
+          <div class="t-step-idx">05</div>
+          <h5 class="t-step-name">Random Forest Fit</h5>
+          <p class="t-step-desc">50 estimators, max_depth=10, class_weight='balanced'</p>
+        </div>
+        <div class="t-arrow">&rarr;</div>
+
+        <div class="t-step" id="tstep-6">
+          <div class="t-step-idx">06</div>
+          <h5 class="t-step-name">Evaluation &amp; Export</h5>
+          <p class="t-step-desc">Joblib dump of model.joblib + scaler.joblib</p>
+        </div>
+        <div class="t-arrow">&rarr;</div>
+
+        <div class="t-step t-step-final" id="tstep-7">
+          <div class="t-step-idx"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+          <h5 class="t-step-name">Upload to S3</h5>
+          <p class="t-step-desc"><code>s3://shyam-fraud-ml-model-2026/model/</code></p>
+        </div>
+      </div>
+
+      <div class="training-notice-box">
+        <i class="fa-solid fa-circle-info accent-text"></i>
+        <span><strong>Clear Distinction:</strong> Model training is conducted <em>offline once</em>. In-memory real-time inference runs <em>online per request</em> in AWS Lambda.</span>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         SECTION 17: CLICKABLE COMPONENT INSPECTOR ENCYCLOPEDIA
+         ===================================================================== -->
+    <section class="card section-block" id="component-inspector-section">
+      <div class="section-header">
+        <div>
+          <span class="section-tag">Interactive Encyclopedia</span>
+          <h3 class="section-title">Component Specifications &amp; Interface Details</h3>
+          <p class="section-desc">Click any system component below to inspect its detailed technical role, configuration, and interfaces.</p>
+        </div>
+        <span class="badge badge-soft font-mono">Click to Inspect</span>
+      </div>
+
+      <!-- Component Selection Grid -->
+      <div class="comp-selector-grid">
+        <button type="button" class="comp-btn active" data-component="lambda">
+          <i class="fa-solid fa-microchip"></i>
+          <span>AWS Lambda</span>
+        </button>
+        <button type="button" class="comp-btn" data-component="gateway">
+          <i class="fa-solid fa-network-wired"></i>
+          <span>API Gateway</span>
+        </button>
+        <button type="button" class="comp-btn" data-component="model">
+          <i class="fa-solid fa-brain"></i>
+          <span>Random Forest</span>
+        </button>
+        <button type="button" class="comp-btn" data-component="fallback">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span>Fallback Rule</span>
+        </button>
+        <button type="button" class="comp-btn" data-component="s3">
+          <i class="fa-solid fa-box-archive"></i>
+          <span>Amazon S3</span>
+        </button>
+        <button type="button" class="comp-btn" data-component="cloudwatch">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>CloudWatch</span>
+        </button>
+        <button type="button" class="comp-btn" data-component="iam">
+          <i class="fa-solid fa-lock"></i>
+          <span>AWS IAM</span>
+        </button>
+        <button type="button" class="comp-btn" data-component="frontend">
+          <i class="fa-solid fa-desktop"></i>
+          <span>Frontend UI</span>
+        </button>
+      </div>
+
+      <!-- Detailed Inspection Card -->
+      <div class="comp-detail-card" id="compDetailCard">
+        <div class="comp-detail-header">
+          <div>
+            <span class="badge badge-accent font-mono" id="compBadge">AWS COMPUTE</span>
+            <h4 class="comp-detail-title" id="compTitle">AWS Lambda (Python 3.12)</h4>
+          </div>
+          <span class="font-mono text-xs text-muted" id="compType">Serverless Inference Engine</span>
+        </div>
+        <p class="comp-detail-body" id="compBody">
+          AWS Lambda performs serverless inference by parsing the incoming HTTP API v2.0 event, validating the 29 numeric features, preparing the feature vector in exact feature_names_in_ sequence, standardizing ONLY the Amount column with StandardScaler, loading the ML artifacts when required, running the Scikit-Learn Random Forest model, and returning the prediction and risk score.
+        </p>
+        <div class="comp-detail-chips" id="compChips">
+          <!-- Chips injected by architecture.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: RETURN TO DASHBOARD CTA -->
+    <section class="card cta-card">
+      <div class="cta-flex">
+        <div>
+          <h3 class="cta-title">Ready to Test Real-Time Inference?</h3>
+          <p class="cta-desc">Return to the interactive Dashboard to populate transactions and execute live predictions against your AWS Lambda backend.</p>
+        </div>
+        <a href="index.html" class="btn btn-primary btn-lg">
+          <i class="fa-solid fa-arrow-left"></i>
+          <span>Return to Dashboard</span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <p>Innovate faster with machine learning (ML) on AWS &bull; Credit Card Fraud Detection System</p>
+      <div class="footer-links">
+        <a href="index.html" class="arch-link">Dashboard</a>
+        <span>&bull;</span>
+        <span class="font-mono text-muted">HPCC Mini-Project</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="architecture.js"></script>
+</body>
+</html>
